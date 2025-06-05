@@ -13,22 +13,27 @@
 
       <div>
         <label for="name" class="block text-gray-600 font-medium mb-1">Name</label>
-        <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        <input type="text" id="name" name="name" value="{{ request.POST.name|default:'' }}" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
       </div>
 
       <div>
         <label for="phone" class="block text-gray-600 font-medium mb-1">Phone Number</label>
-        <input type="text" id="phone" name="phone" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        <input type="text" id="phone" name="phone" value="{{ request.POST.phone|default:'' }}" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        {% if errors.phone_number %}
+          <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            <span class="font-medium">{{ errors.phone_number.0 }}</span>
+          </div>
+        {% endif %}
       </div>
 
       <div>
         <label for="mail" class="block text-gray-600 font-medium mb-1">E-mail</label>
-        <input type="email" id="mail" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        <input type="email" id="mail" name="email" value="{{ request.POST.email|default:'' }}" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
       </div>
 
       <div>
         <label for="address" class="block text-gray-600 font-medium mb-1">Address</label>
-        <input type="text" id="address" name="address" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        <input type="text" id="address" name="address" value="{{ request.POST.address|default:'' }}" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
       </div>
     </div>
 

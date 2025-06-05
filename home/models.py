@@ -34,7 +34,7 @@ class order(models.Model):
         validators=[
             RegexValidator(
                 regex=r'^((\+92)?(0092)?(92)?(0)?3[0-9]{9})$',  
-                message="Enter a Pakistan phone number"
+                message="Enter a Pakistan phone number in format +92xxxxxxxxxx"
             )
         ]
     )
@@ -58,7 +58,7 @@ class contactUs(models.Model):
         validators=[
             RegexValidator(
                 regex=r'^((\+92)?(0092)?(92)?(0)?3[0-9]{9})$',  
-                message="Enter a Pakistan phone number"
+                message="Enter a Pakistan phone number in format +92xxxxxxxxxx"
             )
         ]
     )

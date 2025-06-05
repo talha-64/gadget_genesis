@@ -188,7 +188,19 @@ def checkout(request):
         total_price=updated_total,
         user=request.user
       )
-
+      try:
+        new_order.full_clean()  # 🔍 Enforces model field validations
+        new_order.save()
+      except ValidationError as e:
+        return render(request, 'checkout.html', {
+          'product': prod,
+          'total': total,
+          'quantity': quantity,
+          'shipping_cost': shipping_cost,
+          'gtotal': updated_total,
+          'errors': e.message_dict
+      })
+    
       request.session['last_order_id'] = new_order.id
 
       return redirect('ordercompleted')
