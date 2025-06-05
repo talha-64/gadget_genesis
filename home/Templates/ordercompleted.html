@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Order Completed
+{% endblock %}
+
+{% block content %}
+
+
+  <div class="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-8 mt-16 text-center" >
+  <div class="space-y-4 p-4" id="captureArea"> 
+    <h1 class="text-3xl font-bold text-green-600">Thanks For Ordering!</h1>
+    <h2 class="text-xl font-semibold text-gray-800 mt-4">Order Details</h2>
+
+    <div class="text-left space-y-2 mt-6">
+      <h3 class="font-medium text-gray-700">Order ID:</h3>
+      <p id="orderId" class="text-indigo-600 font-semibold">{{order.id}}</p>
+
+      <h3 class="font-medium text-gray-700">Name:</h3>
+      <p id="OCname" class="text-gray-800">{{order.name}}</p>
+
+      <h3 class="font-medium text-gray-700">E-mail:</h3>
+      <p id="OCmail" class="text-gray-800">{{order.email}}</p>
+      
+      <h3 class="font-medium text-gray-700">Phone Number:</h3>
+      <p id="OCmail" class="text-gray-800">{{order.phone_number}}</p>
+
+      <h3 class="font-medium text-gray-700">Address:</h3>
+      <p id="OCaddress" class="text-gray-800">{{order.address}}</p>
+
+      <h3 class="font-medium text-gray-700">Total Amount:</h3>
+      <p id="OCtotal" class="text-gray-800">{{order.total_price}}</p>
+    </div>
+
+    <p class="mt-6 text-gray-600">You will receive your order in <span class="font-semibold text-gray-800">5 to 7 working days.</span></p>
+  </div>
+
+</div>
+<div class="w-full flex justify-center items-center my-10  space-x-4">
+  <a href="{% url 'home' %}">
+    <button class="bg-green-400 text-white px-6 py-2 rounded-lg hover:bg-[#2fa06d] transition duration-300">
+      Back to Home
+    </button>
+  </a>
+
+  <button onclick="captureDiv()" class="bg-green-400 text-white px-6 py-2 rounded-lg hover:bg-[#2fa06d] transition duration-300">
+    Save Image
+  </button>
+</div>
+
+
+{% endblock %}
+{% block javascript %}
+  <script src="{% static 'js/ordercompleted.js' %}"></script>
+{% endblock %}

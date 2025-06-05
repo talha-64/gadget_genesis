@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Gadget Genesis - Cart {% endblock %}
+
+{% block content %}
+
+<div class="maincart px-4 sm:px-6 lg:px-8 py-4 mt-16 mb-16">
+  <div class="steps mx-auto mb-6 flex justify-center">
+    <button class="shoppingCart flex items-center space-x-2 bg-[#05DF72] text-black px-4 py-2 rounded-md">
+      <span class="num font-bold">1</span>
+      <span>Shopping Cart</span>
+    </button>
+  </div>
+
+  <div class="itemsmain" id="shoppingCart">
+    <div class="itemslist space-y-4">
+
+      <div class="cart-header hidden md:grid grid-cols-4 gap-4 bg-gray-200 p-4 rounded-md text-sm font-semibold text-gray-700">
+        <div class="heading1">Product</div>
+        <div class="heading text-center">Quantity</div>
+        <div class="heading text-center">Price (Rs)</div>
+        <div class="heading text-center">Total (Rs)</div>
+      </div>
+
+      {% if cartItems %}
+        {% for item in cartItems %}
+        <!-- Cart Item -->
+        <div class="cart-item grid grid-cols-1 md:grid-cols-4 gap-4 items-center bg-white p-4 rounded-md shadow-md">
+
+          <!-- Product Info -->
+          <div class="product-info flex items-center space-x-4">
+            <img src="{{ item.image.url }}" alt="Product Image" class="w-16 h-16 object-cover rounded-md" />
+            <div class="product-details">
+              <h3 class="font-semibold text-gray-800">{{ item.name }}</h3>
+            </div>
+          </div>
+
+          <!-- Quantity Form -->
+          <div class="text-center">
+            <form method="GET">
+              {% csrf_token %}
+              <input type="hidden" name="product_id" value="{{ item.id }}">
+              <input name="quantity" type="number" value="{{ quantity }}" min="1"
+                onchange="this.form.submit()"
+                class="w-20 text-center border border-gray-300 rounded-md py-1 px-2">
+            </form>
+          </div>
+
+          <!-- Price -->
+          <div class="priceCont text-center text-gray-700">
+            <span>Rs.</span>
+            <span class="price font-medium">{{ item.price }}</span>
+          </div>
+
+          <!-- Total -->
+          <div class="totalCont text-center text-gray-700">
+            <span>Rs.</span>
+            <span class="total font-medium">{{ total }}</span>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <h3 class="text-center text-lg text-gray-600 mt-4">Cart is empty</h3>
+      {% endif %}
+
+      <!-- Next Button -->
+      <div class="text-center mt-6">
+        <a href="{% url 'checkout' %}">
+          <button class="cardbtn3 mx-auto bg-green-500 w-full md:w-3xl hover:bg-green-600 text-white px-5 py-2 rounded-md">
+            Next
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
+

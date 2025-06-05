@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block title %} {{ product.name }} {% endblock %} 
+
+{% block content %}
+<main>
+<div class="flex flex-col md:flex-row px-4 sm:px-8 md:px-16 lg:px-20 xl:px-35 py-10 sm:py-16 md:py-20">
+<img class="w-full md:w-1/4 text mb-6 md:mb-0" src="{{ product.image.url }}" alt="">
+<div class="px-0 md:px-6 lg:px-12 xl:px-16 2xl:px-20 py-0 md:py-6 lg:py-8 xl:py-10">
+<h1 class="text-3xl font-bold text-green-400" > {{ product.name }} </h1>
+<h2 class="text-2xl font-bold text-green-400">Rs. {{ product.price }}</h2>
+<br>
+<h2 class='text-xl font-bold mb-4'> Description About this product:- </h2>
+<p>
+<b>M10 Wireless Earbuds – Redefine Your Audio Experience</b>
+Elevate your listening journey with the M10 Wireless Earbuds, a perfect blend of cutting-edge technology and sleek design.
+<b>Key Features:</b> 
+<b>True Wireless Freedom:</b> Enjoy hassle-free connectivity with Bluetooth 5.3 for a stable and seamless connection.
+<b>Hi-Fi Sound Quality:</b> Experience powerful bass, balanced mids, and crisp highs for a truly dynamic sound.
+<b>Ergonomic Design:</b> Lightweight and snug, the M10 earbuds ensure a comfortable fit for extended use.
+<b>Long Battery Life:</b> Up to 30 hours of playtime with the charging case, so your music never stops.
+<b>Touch Control:</b> Effortlessly manage calls, playback, and volume with intuitive touch sensors.
+<b>Water-Resistant:</b> With IPX5 certification, the earbuds are perfect for workouts and outdoor adventures.
+Whether you're in the gym or relaxing at home, the M10 Wireless Earbuds adapt to your lifestyle, ensuring premium audio quality at all times.
+Make every moment sound better. Choose M10 Wireless Earbuds today!                        
+</p>
+<br>
+{% if user.is_authenticated %}
+<a href="{% url 'cart' product.id %}">
+  <button data-product = {{product.id}} class="add_cart_btn bg-green-400 w-[30%] font-semibold rounded-md text-center py-2  mt-2 hover:bg-green-600 transition" type="button">Show in cart</button>
+</a>
+{% else %}
+<a href="{% url 'login' %}">
+  <button class="bg-green-400 w-[30%] font-semibold rounded-md text-center py-2  mt-2 hover:bg-green-600 transition" type="button">Show in cart</button>
+</a>
+{% endif %}
+</div>
+</div>
+</main>
+
+{% endblock %}
+
+{% block javascript %}
+  <script src="{% static 'js/cart.js' %}"></script>
+{% endblock %}
+

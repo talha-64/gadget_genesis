@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}
+Profile {{user.first_name}} {{user.last_name}}
+{% endblock %}
+
+{% block content %}
+<div class="bg-white overflow-hidden shadow rounded-lg border max-w-[700px] h-[400px] mx-auto mt-12 mb-12">
+    <div class="px-4 py-5 sm:px-6">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+            User Profile
+        </h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+            This is some information about the user.
+        </p>
+    </div>
+    <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+        <dl class="sm:divide-y sm:divide-gray-200">
+            <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    First name
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{user.first_name}}
+                </dd>
+            </div>
+            <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Last name
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{user.last_name}}
+                </dd>
+            </div>
+            <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    User name
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{user.username}}
+                </dd>
+            </div>
+            <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Email address
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{user.email}}
+                </dd>
+            </div>
+        </dl>
+    </div>
+    
+</div>
+
+<div class=" mx-auto mt-10 bg-white p-6 rounded-lg shadow">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Order Summary</h2>
+    
+{% if orders %}
+{% for order in orders %}
+  <div class="max-w-7xl mx-auto mt-10">
+  <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-6 border-b pb-2">Order Summary</h2>
+<div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8 text-gray-700 text-sm sm:text-base">
+
+  <div class="flex items-center gap-2">
+    <span class="font-semibold">Order ID:</span>
+    <span>{{ order.id }}</span>
+  </div>
+
+  <div class="flex items-center gap-2">
+    <span class="font-semibold">Name:</span>
+    <span>{{ order.name }}</span>
+  </div>
+
+  <div class="flex items-center gap-2">
+    <span class="font-semibold">Phone:</span>
+    <span>{{ order.phone_number }}</span>
+  </div>
+
+  <div class="flex items-center gap-2">
+    <span class="font-semibold">Email:</span>
+    <span>{{ order.email }}</span>
+  </div>
+
+  <div class="flex items-center gap-2">
+    <span class="font-semibold">Product:</span>
+    <span>{{ order.product.name }}</span>
+  </div>
+
+  <div class="flex items-center gap-2">
+    <span class="font-semibold">Quantity:</span>
+    <span>{{ order.prod_quantity }}</span>
+  </div>
+
+  <div class="flex items-center gap-2">
+    <span class="font-semibold">Total:</span>
+    <span>Rs. {{ order.total_price }}</span>
+  </div>
+
+  <div class="flex items-center gap-2">
+    <span class="font-semibold">Status:</span>
+    <span class="text-green-600 font-medium">{{ order.status }}</span>
+  </div>
+</div>
+  <div class="col-span-full mt-6">
+    <span class="font-semibold block mb-2">Address:</span>
+    <p class="break-words whitespace-normal">{{ order.address }}</p>
+  </div>
+
+</div>
+
+
+
+  </div>
+</div>
+
+{% endfor %}
+{% else %}
+<h2 class='mb-12 text-center'>No orders to display</h2>
+{% endif %}
+</div>
+
+
+
+{% endblock %}

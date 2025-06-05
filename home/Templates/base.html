@@ -1,0 +1,125 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    {% tailwind_css %}
+    <title>{% block title %} Home {% endblock %}</title>
+  </head>
+  <body>
+  <header class="shadow-md">
+    <!-- Top Header -->
+    <div class="bg-green-400 h-10 w-full flex items-center justify-center gap-2 font-semibold text-black">
+      <span class="material-symbols-outlined">confirmation_number</span>
+      <p>Upto 30% off - Limited Time Offer</p>
+      <div class="flex items-center gap-1">
+        <a class="underline cursor-pointer text-black" href="{% url 'shop' %}">Shop Now</a>
+        <span class="material-symbols-outlined">arrow_forward</span>
+      </div>
+    </div>
+
+    <div class="w-full flex flex-col md:flex-row items-center md:h-16 px-4 md:px-8">
+  
+  <!-- Left (Logo - Hidden on small screens) -->
+    <div class="hidden md:flex w-full md:w-1/4 justify-center items-center">
+      <a href="{% url 'home' %}">
+        <img class="h-12" src="{% static "images/pictures/Logo.png" %}" alt="Logo" />
+      </a>
+    </div>
+
+    <!-- Middle (Navigation Links) -->
+    <div class="w-full md:w-2/4 flex flex-col md:flex-row justify-center items-center gap-2 md:gap-6 py-2 md:py-0">
+      <a href="{% url 'home' %}" class="font-medium text-black"><b>Home</b></a>
+      <a href="{% url 'shop' %}" class="font-medium text-black">Shop</a>
+      {% if user.is_authenticated %}
+        <a href="{% url 'cart' %}" class="font-medium text-black">My Cart</a>
+        <a href="{% url 'contact' %}" class="font-medium text-black">Contact Us</a>
+      {% else %}
+        <a href="{% url 'login' %}" class="font-medium text-black">My Cart</a>
+        <a href="{% url 'login' %}" class="font-medium text-black">Contact Us</a>
+      {% endif %}
+    </div>
+
+    <!-- Right (User Info / Login/Logout) -->
+    <div class="w-full md:w-1/4 flex justify-center md:justify-end items-center gap-2 py-2 md:py-0">
+      {% if user.is_authenticated %}
+        <a href="{% url 'profile' %}" class="text-black">
+          <p class="text-sm">Welcome! {{user.first_name}} {{user.last_name}}</p>
+        </a>
+        <a href="{% url 'profile' %}" class="text-black">
+          <span class="material-symbols-outlined">account_circle</span>
+        </a>
+        <a href="{% url 'logout' %}" class="text-black">
+          <span class="material-symbols-outlined">logout</span>
+        </a>
+      {% else %}
+        <a href="{% url 'login' %}" class="text-black">
+          <span class="material-symbols-outlined">login</span>
+        </a>
+      {% endif %}
+    </div>
+  </div>
+    </header>
+
+  <main>
+    {% block content %}
+    <h1>base</h1>
+    {% endblock %}
+  </main>
+
+  <footer class="bg-neutral-900 text-white px-4 md:px-40 py-20 shadow-md">
+    <div class="flex flex-col md:flex-row mb-12 gap-8 md:gap-0">
+      <!-- Brand -->
+      <div class="md:w-3/5">
+        <h2 class="mb-2 text-2xl font-bold">Gadget Genesis.</h2>
+        <h3 class="mb-4 text-lg">Elevating Your Tech Experience</h3>
+        <div class="flex gap-4 mt-5">
+          <a href="https://www.instagram.com/gadget_genesis/" class="text-white">
+            <i class="fa-brands fa-instagram fa-lg"></i>
+          </a>
+          <a href="https://www.instagram.com/gadget_genesis/" class="text-white">
+            <i class="fa-brands fa-facebook fa-lg"></i>
+          </a>
+          <a href="https://www.instagram.com/gadget_genesis/" class="text-white">
+            <i class="fa-brands fa-x-twitter fa-lg"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Pages -->
+      <div class="md:w-1/5 flex flex-col gap-4">
+        <h4 class="text-lg font-semibold">Pages</h4>
+        <a href="{% url 'home' %}" class="text-white">Home</a>
+        <a href="{% url 'shop' %}" class="text-white">Shop</a>
+        <a href="{% url 'shop' %}" class="text-white">Product</a>
+        <a href="{% url 'contact' %}" class="text-white">Contact Us</a>
+      </div>
+
+      <!-- Info -->
+      <div class="md:w-1/5 flex flex-col gap-4">
+        <h4 class="text-lg font-semibold">Info</h4>
+        <a href="#" class="text-white">Shipping Policy</a>
+        <a href="#" class="text-white">Return & Refund</a>
+        <a href="#" class="text-white">Support</a>
+        <a href="#" class="text-white">FAQs</a>
+      </div>
+    </div>
+    <hr class="border-gray-700" />
+    <div class="mt-8 flex flex-wrap gap-4 text-sm">
+      <a href="#" class="text-white">Copyright © 2024 Gadget Genesis. All rights reserved |</a>
+      <a href="#" class="text-white">Privacy Policy</a>
+      <a href="#" class="text-white">Terms & Conditions</a>
+    </div>
+  </footer>
+</body>
+
+  {% block javascript %}
+  {% endblock %}
+</html>
